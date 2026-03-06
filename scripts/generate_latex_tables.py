@@ -57,12 +57,12 @@ def main():
     p.add_argument(
         "--main_metrics",
         nargs="+",
-        default=["bleu1", "bleu4", "rougeL", "cider", "consistency", "fidelity", "usefulness"],
+        default=["bleu1", "bleu2", "bleu3", "bleu4", "rougeL", "cider", "consistency", "fidelity", "usefulness"],
     )
     p.add_argument(
         "--ablation_metrics",
         nargs="+",
-        default=["bleu1", "bleu4", "rougeL", "cider", "fidelity", "usefulness", "consistency"],
+        default=["bleu1", "bleu2", "bleu3", "bleu4", "rougeL", "cider", "fidelity", "usefulness", "consistency"],
     )
     args = p.parse_args()
 
