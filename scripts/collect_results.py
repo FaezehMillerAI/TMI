@@ -48,6 +48,8 @@ def collect_run(run_dir: Path):
         "n_test": summary.get("num_test_records"),
         "best_val_loss": summary.get("best_val_loss"),
         "bleu1": metrics.get("bleu1"),
+        "bleu2": metrics.get("bleu2"),
+        "bleu3": metrics.get("bleu3"),
         "bleu4": metrics.get("bleu4"),
         "rougeL": metrics.get("rougeL"),
         "cider": metrics.get("cider"),
