@@ -22,7 +22,7 @@ def main():
 
     sns.set_theme(style="whitegrid")
 
-    metric_cols = ["bleu1", "bleu4", "rougeL", "cider", "fidelity", "usefulness", "consistency"]
+    metric_cols = ["bleu1", "bleu2", "bleu3", "bleu4", "rougeL", "cider", "fidelity", "usefulness", "consistency"]
     for m in metric_cols:
         if m not in df.columns:
             continue
