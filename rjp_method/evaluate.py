@@ -23,6 +23,21 @@ def bleu1(pred, ref):
     return sentence_bleu([_tokens(ref)], _tokens(pred), weights=(1, 0, 0, 0), smoothing_function=smooth)
 
 
+def bleu2(pred, ref):
+    smooth = SmoothingFunction().method1
+    return sentence_bleu([_tokens(ref)], _tokens(pred), weights=(0.5, 0.5, 0, 0), smoothing_function=smooth)
+
+
+def bleu3(pred, ref):
+    smooth = SmoothingFunction().method1
+    return sentence_bleu(
+        [_tokens(ref)],
+        _tokens(pred),
+        weights=(1 / 3, 1 / 3, 1 / 3, 0),
+        smoothing_function=smooth,
+    )
+
+
 def bleu4(pred, ref):
     smooth = SmoothingFunction().method1
     return sentence_bleu(
