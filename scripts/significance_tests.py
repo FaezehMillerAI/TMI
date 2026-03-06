@@ -37,7 +37,7 @@ def main():
         "--metrics",
         type=str,
         nargs="+",
-        default=["bleu1", "bleu4", "rougeL", "cider", "fidelity", "usefulness", "consistency"],
+        default=["bleu1", "bleu2", "bleu3", "bleu4", "rougeL", "cider", "fidelity", "usefulness", "consistency"],
     )
     p.add_argument("--n_boot", type=int, default=10000)
     p.add_argument("--out_json", type=str, default="analysis/significance.json")
