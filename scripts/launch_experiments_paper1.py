@@ -1,5 +1,6 @@
 import argparse
 import subprocess
+from tqdm import tqdm
 
 
 def main():
@@ -19,8 +20,8 @@ def main():
         ("fixed_fusion", ["--disable_adaptive_fusion", "--fixed_fusion_alpha", "0.5"]),
     ]
 
-    for seed in args.seeds:
-        for name, extra in variants:
+    jobs = [(seed, name, extra) for seed in args.seeds for name, extra in variants]
+    for seed, name, extra in tqdm(jobs, desc="Ablation Runs", leave=True):
             run_name = f"{name}_seed{seed}"
             cmd = [
                 args.python_bin,
