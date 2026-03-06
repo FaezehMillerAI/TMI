@@ -1,0 +1,53 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+\title{Retrieval-Justified Radiology Report Generation with Residual Alignment}
+\author{<Authors>}\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+% Problem + method + key results + impact
+\end{abstract}
+
+\section{Introduction}
+% Motivation for explainable report generation and grounded reasoning.
+
+\section{Method}
+\subsection{Retrieval-Justification Protocol}
+% Factual, counterfactual, anatomy-aware retrieval.
+
+\subsection{Adaptive Fusion Decoder}
+% Dynamic mixture of image and retrieved evidence.
+
+\subsection{Residual Alignment Mechanism (RAM)}
+\[
+\mathcal{L}=\mathcal{L}_{gen}+\lambda_{ram}(1-\cos(z_{align}, z_{ret}))
+\]
+
+\section{Experimental Setup}
+% IU X-ray data, preprocessing, hyperparameters, seed/split policy.
+
+\section{Results}
+\subsection{Main Results}
+\input{tables/main_results.tex}
+
+\subsection{Ablation Results}
+\input{tables/ablation_results.tex}
+
+\subsection{Significance and Stability}
+% Use analysis/significance.csv outputs.
+
+\section{Qualitative Explainability Analysis}
+% Show samples with generated report + factual/counterfactual/anatomy evidence.
+
+\section{Limitations and Clinical Use}
+
+\section{Conclusion}
+
+\end{document}
