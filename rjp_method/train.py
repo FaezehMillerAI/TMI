@@ -5,7 +5,16 @@ import torch.nn as nn
 import torch.nn.functional as F
 from tqdm import tqdm
 
-from .evaluate import bleu1, bleu4, cider_score, dice_x_scores, rouge_l_f1, summarize_metrics
+from .evaluate import (
+    bleu1,
+    bleu2,
+    bleu3,
+    bleu4,
+    cider_score,
+    dice_x_scores,
+    rouge_l_f1,
+    summarize_metrics,
+)
 from .explainability import generate_qualitative_bundle
 from .retrieval import RetrievalEngine
 from .text import BOS, EOS
@@ -115,6 +124,8 @@ def evaluate_generation(model, loader, retrieval_engine, vocab, cfg, device, max
 
             m = {
                 "bleu1": bleu1(pred, ref),
+                "bleu2": bleu2(pred, ref),
+                "bleu3": bleu3(pred, ref),
                 "bleu4": bleu4(pred, ref),
                 "rougeL": rouge_l_f1(pred, ref),
                 "cider": cider_score(pred, ref),
