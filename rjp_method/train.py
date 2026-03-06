@@ -3,7 +3,7 @@ import json
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from tqdm import tqdm
+from tqdm import tqdm, trange
 
 from .evaluate import (
     bleu1,
@@ -29,7 +29,7 @@ def train_one_epoch(model, loader, optimizer, criterion, retrieval_engine, vocab
     model.train()
     running = 0.0
 
-    for batch in tqdm(loader, desc="train", leave=False):
+    for batch in tqdm(loader, desc="Train Batches", leave=True):
         images = batch["image"].to(device)
         tokens = batch["tokens"].to(device)
         reports = batch["report"]
@@ -66,7 +66,7 @@ def validate_loss(model, loader, criterion, retrieval_engine, vocab, cfg, device
     model.eval()
     running = 0.0
 
-    for batch in tqdm(loader, desc="val", leave=False):
+    for batch in tqdm(loader, desc="Val Batches", leave=True):
         images = batch["image"].to(device)
         tokens = batch["tokens"].to(device)
         reports = batch["report"]
@@ -102,7 +102,7 @@ def evaluate_generation(model, loader, retrieval_engine, vocab, cfg, device, max
     rows = []
     metrics = []
 
-    for batch in tqdm(loader, desc="test-gen", leave=False):
+    for batch in tqdm(loader, desc="Test Batches", leave=True):
         images = batch["image"].to(device)
         refs = batch["report"]
         uids = batch["uid"]
@@ -176,7 +176,8 @@ def run_training(model, train_loader, val_loader, test_loader, vocab, cfg, devic
     best_val = 1e9
     history = []
 
-    for epoch in range(1, cfg.epochs + 1):
+    epoch_bar = trange(1, cfg.epochs + 1, desc="Epochs", leave=True)
+    for epoch in epoch_bar:
         tr_loss = train_one_epoch(
             model, train_loader, optimizer, criterion, retrieval_engine, vocab, cfg, device
         )
@@ -184,6 +185,7 @@ def run_training(model, train_loader, val_loader, test_loader, vocab, cfg, devic
             model, val_loader, criterion, retrieval_engine, vocab, cfg, device
         )
         history.append({"epoch": epoch, "train_loss": tr_loss, "val_loss": val_loss})
+        epoch_bar.set_postfix(train_loss=f"{tr_loss:.4f}", val_loss=f"{val_loss:.4f}")
 
         if val_loss < best_val:
             best_val = val_loss
